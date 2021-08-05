@@ -35,7 +35,6 @@
     mode: 0755
     state: directory
   tags: dir
-
 - name: "Install master"
   get_url:
     url: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64.tar.gz"
@@ -45,12 +44,27 @@
 - name: "unarchive kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
   unarchive:
     src: "/tmp/kubernetes-server-linux-amd64.tar.gz"
-    dest: /usr/bin/
+    dest: /tmp/
     owner: kube
     group: kube
-    mode: 0755    
+    mode: 0755
     remote_src: yes
-  tags: install_master
+  tags: "unarchive__master"
+- name: "Install master"
+  copy:
+    src: "{{ item.src }}"
+    dest: "/usr/bin/"
+    owner: kube
+    group: kube
+    mode: 0755
+    remote_src: yes
+  with_items:
+    - {src: "/tmp/kubernetes/server/bin/kube-apiserver"}
+    - {src: "/tmp/kubernetes/server/bin/kubectl"}
+    - {src: "/tmp/kubernetes/server/bin/kube-scheduler"}
+    - {src: "/tmp/kubernetes/server/bin/kube-controller-manager"}
+  tags: "install__master"
+    
     
 #- name: "Install kubectl"
 #  get_url:
