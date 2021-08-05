@@ -28,8 +28,7 @@
   
 - name: "Install worker"
   get_url:
-    url: 
-    "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64.tar.gz"
+    url: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64.tar.gz"
     dest: /tmp/
   tags: install_node_tgz
 
