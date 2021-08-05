@@ -29,13 +29,13 @@
 - name: "Install worker"
   get_url:
     url: 
-    "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+    "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64.tar.gz"
     dest: /tmp/
   tags: install_node_tgz
 
 - name: "unarchive worker-kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
   unarchive:
-    src: "/tmp/kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+    src: "/tmp/kubernetes-server-linux-amd64.tar.gz"
     dest: /usr/bin/
     owner: root
     group: root
