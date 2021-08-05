@@ -25,18 +25,35 @@
     - {line: '/etc/kubernetes/manifests'}
     - {line: "{{ kubernetes.kubelet_dir }}"}
   tags: dir
-
-- name: "Install worker node"
+  
+- name: "Install worker"
   get_url:
-    url: "{{ item.line }}"
+    url: 
+    "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+    dest: /tmp/
+  tags: install_node_tgz
+
+- name: "unarchive worker-kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+  unarchive:
+    src: "/tmp/kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
     dest: /usr/bin/
     owner: root
     group: root
-    mode: 0750
-  with_items:
-    - { line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kubelet"}
-    - { line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-proxy"}
+    mode: 0644    
+    remote_src: yes   
   tags: install_worker
+
+#- name: "Install worker node"
+#  get_url:
+#    url: "{{ item.line }}"
+#    dest: /usr/bin/
+#    owner: root
+#    group: root
+#    mode: 0750
+#  with_items:
+#    - { line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kubelet"}
+#    - { line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-proxy"}
+#  tags: install_worker
 
 - name: "Distribution worker certs"
   copy:
