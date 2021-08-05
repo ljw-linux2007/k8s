@@ -26,20 +26,32 @@
     - {line: "{{ kubernetes.kubelet_dir }}"}
   tags: dir
   
-- name: "Install worker"
+- name: "download_worker_binary"
   get_url:
     url: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64.tar.gz"
     dest: /tmp/
-  tags: install_node_tgz
+  tags: download_node_tgz
 
-- name: "unarchive worker-kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+- name: "unarchive kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
   unarchive:
     src: "/tmp/kubernetes-server-linux-amd64.tar.gz"
-    dest: /usr/bin/
+    dest: /tmp/
     owner: root
     group: root
-    mode: 0644    
-    remote_src: yes   
+    mode: 0755
+    remote_src: yes
+  tags: "unarchive__worker"
+- name: "Install worker"
+  copy:
+    src: "{{ item.src }}"
+    dest: "/usr/bin/"
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: yes
+  with_items:
+    - {src: "/tmp/kubernetes/server/bin/kubelet"}
+    - {src: "/tmp/kubernetes/server/bin/kube-proxy"}
   tags: install_worker
 
 #- name: "Install worker node"
