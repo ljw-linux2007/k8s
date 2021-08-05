@@ -36,27 +36,44 @@
     state: directory
   tags: dir
 
-- name: "Install kubectl"
-  get_url:
-    url: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kubectl"
-    owner: kube
-    group: kube
-    mode: 0755
-    dest: /usr/bin/
-  tags: install_kubectl
-
 - name: "Install master"
   get_url:
-    url: "{{ item.line }}"
+    url: 
+    "{{ kubernetes.download_url }}/{{ kubernetes.version }}/kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+    dest: /tmp/
+  tags: install_master_tgz
+
+- name: "unarchive kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+  unarchive:
+    src: "/tmp/kubernetes-server-linux-amd64-{{ kubernetes.version }}.tar.gz"
+    dest: /usr/bin/
     owner: kube
     group: kube
-    mode: 0750
-    dest: /usr/bin/
-  with_items:
-    - {line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-apiserver"}
-    - {line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-controller-manager"}
-    - {line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-scheduler"}
+    mode: 0755    
+    remote_src: yes
   tags: install_master
+    
+#- name: "Install kubectl"
+#  get_url:
+#    url: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kubectl"
+#    owner: kube
+#    group: kube
+#    mode: 0755
+#    dest: /usr/bin/
+#  tags: install_kubectl
+#
+#- name: "Install master"
+#  get_url:
+#    url: "{{ item.line }}"
+#    owner: kube
+#    group: kube
+#    mode: 0750
+#    dest: /usr/bin/
+#  with_items:
+#    - {line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-apiserver"}
+#    - {line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-controller-manager"}
+#    - {line: "{{ kubernetes.download_url }}/{{ kubernetes.version }}/bin/linux/amd64/kube-scheduler"}
+#  tags: install_master
 
 - name: "Distribution master certs"
   copy:
