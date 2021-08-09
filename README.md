@@ -224,4 +224,10 @@ ansible-playbook cluster.yml -i inventory -l ${IP} -t restart_apiserver,restart_
 ```
 
 - `-l`参数更换为具体节点IP。
-
+## 六、报错
+![https://raw.githubusercontent.com/ljw-linux2007/image/main/Snipaste_2021-08-09_16-13-24.png](https://raw.githubusercontent.com/ljw-linux2007/image/main/Snipaste_2021-08-09_16-13-24.png)
+出现这个问题首先要排除服务启动状态问题，再排除自己设置代理问题
+```
+unset https_proxy
+unset http_proxy
+```
