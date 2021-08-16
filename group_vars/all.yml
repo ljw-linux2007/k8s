@@ -70,8 +70,12 @@ containerd:
   options:
     SystemdCgroup: true
   registries:
-    "docker.io": "https://registry-1.docker.io"
-    "k8s.gcr.io": "https://registry.aliyuncs.com/k8sxio"
+    "docker.io": "https://docker.mirrors.ustc.edu.cn"
+    "docker.io": "http://hub-mirror.c.163.com"
+    "gcr.io": "https://gcr.mirrors.ustc.edu.cn"
+    "k8s.gcr.io": "https://gcr.mirrors.ustc.edu.cn/google-containers/"
+    "quay.io": "https://quay.mirrors.ustc.edu.cn"
+
 
 # Network Plugin
 network_plugin: calico
