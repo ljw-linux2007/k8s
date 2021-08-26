@@ -1,6 +1,8 @@
 kind: KubeletConfiguration
 apiVersion: kubelet.config.k8s.io/v1beta1
 address: 0.0.0.0
+port: 10250 # 当前kubelet的端口
+readOnlyPort: 10255 # kubelet暴露的端口
 cgroupDriver: systemd
 authentication:
   anonymous:
