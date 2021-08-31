@@ -1,7 +1,10 @@
 使用Ansible Playbook进行生产级别高可用kubernetes集群部署，包含初始化系统配置、自动签发集群证书、安装配置etcd集群、安装配置haproxy及keepalived、calico、coredns、metrics-server等，并使用bootstrap方式认证以及kubernetes组件健康检查。另外支持集群节点扩容、替换集群证书、kubernetes版本升级等。本Playbook使用二进制方式部署。
 
 配合kubernetes剔除dockershim，本Playbook将运行时修改为containerd。
-手动下载二进制tar包地址为阿里云盘加速：https://www.aliyundrive.com/s/U4txg1wKvXZ   ，然后注释role角色master、worker、cni-plugins、cri-tools、etcd中的get_url和download。
+手动下载二进制tar包地址为加速：
+链接：https://pan.baidu.com/s/1488pRCyqBeyMyZ68WnTR8g 
+提取码：aaaa
+然后注释role角色master、worker、cni-plugins、cri-tools、etcd中的get_url和download。
 
 
 
