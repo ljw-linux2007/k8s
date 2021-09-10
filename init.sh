@@ -39,7 +39,7 @@ function Set_hostname(){
 }
  
 function Install_depend_environment(){
-curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+curl -C  -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 
 yum clean all
 
@@ -47,7 +47,7 @@ yum clean all
 yum install -y net-tools lftp rsync psmisc vim-enhanced tree lrzsz bash-completion iproute
     yum install -y nfs-utils curl yum-utils device-mapper-persistent-data lvm2 net-tools conntrack-tools wget vim  ntpdate libseccomp libtool-ltdl telnet
     yum install -y conntrack ipvsadm ipset jq iptables curl sysstat libseccomp && /usr/sbin/modprobe ip_vs 
-	wget   http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+	wget -c -t 0  http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -ivh epel-release-latest-7.noarch.rpm
 yum -y install jq
      echo -e "\033[32;32m 升级Centos7系统内核到5版本，解决Docker-ce版本兼容问题\033[0m \n"
