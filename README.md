@@ -52,7 +52,7 @@ git clone https://github.com/ljw-linux2007/k8s.git
 CentOS7等系统需安装以下依赖才能安装ansible
 
 ```
-yum -y install python36-PyYAML python36-asn1crypto python36-cffi python36-cryptography python36-idna python36-jinja2 python36-jmespath python36-markupsafe python36-paramiko python36-ply python36-pyasn1 python36-pycparser python36-six sshpass
+yum -y install python36-PyYAML python36-asn1crypto python36-cffi python36-cryptography python36-idna python36-jinja2 python36-jmespath python36-markupsafe python36-paramiko python36-ply python36-pyasn1 python36-pycparser python36-six sshpass  libselinux-python python3-libselinux
 ```
 
 - 需要配置epel源
