@@ -42,26 +42,14 @@ function Install_depend_environment(){
 curl -C  -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 
 yum clean all
-cat > /etc/yum.repos.d/ansible.repo << EOF
-[epel]
-name = all source for ansible
-baseurl = https://mirrors.aliyun.com/epel/7/x86_64/
-enabled = 1
-gpgcheck = 0
 
-[ansible]
-name = all source for ansible
-baseurl = http://mirrors.aliyun.com/centos/7.3.1611/os/x86_64/
-enabled = 1
-gpgcheck = 0
-EOF
 
       rpm -qa | grep nfs-utils &> /dev/null && echo -e "\033[32;32m 已完成依赖环境安装，退出依赖环境安装步骤 \033[0m \n" && return
-    yum install -y net-tools lftp rsync psmisc vim-enhanced tree lrzsz bash-completion iproute git ansible nfs-utils curl yum-utils device-mapper-persistent-data lvm2 net-tools conntrack-tools wget vim  ntpdate libseccomp libtool-ltdl telnet
+    yum install -y net-tools lftp rsync psmisc vim-enhanced tree lrzsz bash-completion iproute git nfs-utils curl yum-utils device-mapper-persistent-data lvm2 net-tools conntrack-tools wget vim  ntpdate libseccomp libtool-ltdl telnet
     yum install -y conntrack ipvsadm ipset jq iptables curl sysstat libseccomp && /usr/sbin/modprobe ip_vs 
 	wget -c -t 0  http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -ivh epel-release-latest-7.noarch.rpm
-yum -y install jq
+yum -y install jq ansible 
      echo -e "\033[32;32m 升级Centos7系统内核到5版本，解决Docker-ce版本兼容问题\033[0m \n"
     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
     rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm && \
