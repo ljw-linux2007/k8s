@@ -234,4 +234,7 @@ ansible-playbook cluster.yml -i inventory -l ${IP} -t restart_apiserver,restart_
 ```
 unset https_proxy
 unset http_proxy
+ export  http_proxy=http://172.16.10.150:7890
+ export  https_proxy=http://172.16.10.150:7890
+ export no_proxy=.internal.example.com,10.80.0.1,10.80.0.10,.cluster.local,.svc,localhost,127.0.0.1,192.168.1.21,192.168.1.31,192.168.1.32,192.168.1.100
 ```
